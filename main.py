@@ -7,8 +7,7 @@ from collections import namedtuple
 Transactions = namedtuple('Transactions', 'transaction_id transaction_date post_date merchant amount')
 
 pdf_file = 'statement_2022-05-25.pdf'
-pdf_file_name = pdf_file.split('_')[1]
-pdf_file_name = pdf_file_name.split('.')[0]
+pdf_file_name = pdf_file.split('.')[0]
 
 with pdfplumber.open(pdf_file) as pdf:
     page = pdf.pages
@@ -31,4 +30,4 @@ for line in text.split('\n'):
 
 df = pd.DataFrame(transactions_list)
 
-df.to_csv(f'transactions-{pdf_file_name}.csv')
+df.to_csv(f'{pdf_file_name}.csv')
