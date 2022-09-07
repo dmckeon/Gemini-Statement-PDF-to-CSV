@@ -6,13 +6,15 @@ from collections import namedtuple
 
 Transactions = namedtuple('Transactions', 'transaction_id transaction_date post_date merchant amount')
 
-pdf_file = 'statement_2022-05-25.pdf'
+pdf_file = 'statement_2022-07-25.pdf'
 pdf_file_name = pdf_file.split('.')[0]
 
+
+text = ''
 with pdfplumber.open(pdf_file) as pdf:
     page = pdf.pages
     for i, pg in enumerate(page):
-        text = page[i].extract_text()
+        text += page[i].extract_text()
 
 new_transaction = re.compile(r'(\d{10}) (\d+/\d+/\d+) (\d+/\d+/\d+) ([^$]+) (.*)')
 
