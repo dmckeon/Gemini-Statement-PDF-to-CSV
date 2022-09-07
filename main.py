@@ -9,7 +9,6 @@ Transactions = namedtuple('Transactions', 'transaction_id transaction_date post_
 pdf_file = 'statement_2022-07-25.pdf'
 pdf_file_name = pdf_file.split('.')[0]
 
-
 text = ''
 with pdfplumber.open(pdf_file) as pdf:
     page = pdf.pages
@@ -31,5 +30,4 @@ for line in text.split('\n'):
         transactions_list.append(Transactions(transaction_id, transaction_date, post_date, merchant, amount))
 
 df = pd.DataFrame(transactions_list)
-
 df.to_csv(f'{pdf_file_name}.csv')
